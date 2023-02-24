@@ -1,4 +1,3 @@
-import path from "path";
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import Chart from "./routes/Chart";
