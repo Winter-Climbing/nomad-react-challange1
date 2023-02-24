@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/nomad-react-challange1/static/js/main.f2092dad.js",
+    "main.js": "/nomad-react-challange1/static/js/main.7ac94acb.js",
     "index.html": "/nomad-react-challange1/index.html",
-    "main.f2092dad.js.map": "/nomad-react-challange1/static/js/main.f2092dad.js.map"
+    "main.7ac94acb.js.map": "/nomad-react-challange1/static/js/main.7ac94acb.js.map"
   },
   "entrypoints": [
-    "static/js/main.f2092dad.js"
+    "static/js/main.7ac94acb.js"
   ]
 }
