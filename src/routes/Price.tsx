@@ -47,10 +47,6 @@ declare module PriceData {
   }
 }
 
-interface ToggleDarkType {
-  isDark: boolean;
-}
-
 const MaxMountain = styled.div`
   font-size: x-large;
 `;
