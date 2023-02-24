@@ -1,4 +1,3 @@
-import React from "react";
 import { useOutletContext } from "react-router-dom";
 import { useQuery } from "react-query";
 import { fetchCoinHistory } from "../api";
@@ -25,14 +24,18 @@ interface ToggleDarkType {
 
 export default function Chart() {
   const { coinId } = useOutletContext<ChartProps>();
-  const { isLoading, data } = useQuery<Historical[]>(
-    ["ohlcv", coinId],
-    () => fetchCoinHistory(coinId),
-    {
-      refetchInterval: 10000,
-    }
+  const { isLoading, data } = useQuery<Historical[]>(["ohlcv", coinId], () =>
+    fetchCoinHistory(coinId)
   );
   const { isDark } = useOutletContext<ToggleDarkType>();
+
+  const exceptData = data ?? [];
+  const chartData = exceptData?.map((i) => {
+    return {
+      x: i.time_close,
+      y: [i.open, i.high, i.low, i.close],
+    };
+  });
 
   return (
     <div>
@@ -40,11 +43,10 @@ export default function Chart() {
         "loading chart..."
       ) : (
         <ApexChart
-          type="line"
+          type="candlestick"
           series={[
             {
-              name: "Price",
-              data: data?.map((price) => price.close) as unknown as number[],
+              data: chartData?.map((i) => ({ x: i.x, y: i.y })),
             },
           ]}
           options={{
@@ -52,37 +54,38 @@ export default function Chart() {
               mode: isDark ? "dark" : "light",
             },
             chart: {
-              height: 500,
+              type: "candlestick",
+              height: 350,
               width: 500,
               toolbar: {
                 show: false,
               },
               background: "transparent",
             },
-            grid: { show: false },
             stroke: {
               curve: "smooth",
-              width: 5,
+              width: 2,
             },
             yaxis: {
               show: false,
             },
             xaxis: {
-              axisBorder: { show: false },
-              axisTicks: { show: false },
-              labels: {
-                show: false,
-              },
               type: "datetime",
-              categories: data?.map((price) =>
-                new Date(price.time_close * 1000).toISOString()
-              ),
+              categories: data?.map((price) => price.time_close),
+              labels: {
+                style: {
+                  colors: "#9c88ff",
+                },
+              },
             },
-            fill: {
-              type: "gradient",
-              gradient: { gradientToColors: ["#0be881"], stops: [0, 100] },
+            plotOptions: {
+              candlestick: {
+                colors: {
+                  upward: "#3C90EB",
+                  downward: "#DF7D46",
+                },
+              },
             },
-            colors: ["#0fbcf9"],
           }}
         />
       )}

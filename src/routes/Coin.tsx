@@ -192,6 +192,7 @@ export default function Coin() {
     useQuery<InfoData.RootObject>(["info", coinId], () =>
       fetchCoinInfo(coinId)
     );
+
   const { isLoading: tickersLoading, data: tickersData } =
     useQuery<PriceData.RootObject>(
       ["tickers", coinId],
@@ -235,7 +236,7 @@ export default function Coin() {
             </OverviewItem>
             <OverviewItem>
               <span>Price:</span>
-              <span>{tickersData?.quotes.USD.price.toFixed(3)}</span>
+              <span>{tickersData?.quotes?.USD?.price.toFixed(3)}</span>
             </OverviewItem>
           </Overview>
           <Description>{infoData?.description}</Description>

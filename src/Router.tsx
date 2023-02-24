@@ -3,13 +3,14 @@ import App from "./App";
 import Chart from "./routes/Chart";
 import Coin from "./routes/Coin";
 import Coins from "./routes/Coins";
+import NotFound from "./routes/NotFound";
 import Price from "./routes/Price";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <div>Not Found</div>,
+    errorElement: <NotFound />,
     children: [
       { index: true, element: <Coins /> },
       {
