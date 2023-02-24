@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { useOutletContext } from "react-router-dom";
 import { useQuery } from "react-query";
-import { fetchCoinHistory, fetchCoinTickers } from "../api";
-import ApexChart from "react-apexcharts";
+import { fetchCoinTickers } from "../api";
 
 interface ChartProps {
   coinId: string;
@@ -66,7 +65,6 @@ export default function Price() {
         refetchInterval: 5000,
       }
     );
-  const { isDark } = useOutletContext<ToggleDarkType>();
 
   return (
     <div>
